@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit; //for testing purposes
+
 class Node{
     Node left,right;
     int data;
@@ -21,12 +22,12 @@ class ThreadedBinaryTree {
         Node current;
         int parentData;
         int ch;
-        boolean success=false;
 
         Scanner sc = new Scanner(System.in);
         
         //to display all nodes
         inorder(root);
+       
         System.out.print("\nEnter which node's child you want the new node to be : ");
         parentData = sc.nextInt();
 
@@ -46,8 +47,6 @@ class ThreadedBinaryTree {
         }
         //now, current is parent
         //prompt for left or right child 
-        ch=2;
-        do{
             System.out.print("\n Insert as \n1) Left child\n2) Right child\nEnter your choice : ");
             ch=sc.nextInt();
             switch(ch){
@@ -71,7 +70,6 @@ class ThreadedBinaryTree {
                         newNode=current.left;
                         newNode.data=id;
                     }
-                    success=true;
                     break;
                 case 2 : //right child
                     if(current.rightThread || current.right==null){//thread means no child
@@ -93,14 +91,9 @@ class ThreadedBinaryTree {
                         newNode=current.right;
                         newNode.data=id;
                     }
-                    success=true;
-                    break;
-                case 3 : //exit
                     break;
                 default : System.out.println("Invalid option!");
             }
-            if(success) break;
-        }while(ch<2);
         sc.close();
         return;
     }
@@ -157,8 +150,7 @@ class ThreadedBinaryTree {
 }
 
 class BinaryTree extends ThreadedBinaryTree{
-
-    public static void main(String[] args) {
+    public static void main(String args[]) {
         Scanner sc = new Scanner(System.in);
         //create new binary tree
         BinaryTree bt = new BinaryTree();
@@ -206,7 +198,6 @@ class BinaryTree extends ThreadedBinaryTree{
                 default: System.out.println("Invalid operation!");
             }
             System.out.println("\n");
-            if(!success) break;
         }while(ch<6);
         sc.close();
     }

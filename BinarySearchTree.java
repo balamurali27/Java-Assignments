@@ -75,7 +75,6 @@ class ThreadedBinaryTree {
 }
 class BinaryTree extends ThreadedBinaryTree{
     public void inorder(Node root){
-        System.out.println("*******Inorder traversal*******");
         //start at left most node (smallest)
         Node current=leftMostChild(root);
         while(current!=null){
@@ -88,7 +87,6 @@ class BinaryTree extends ThreadedBinaryTree{
         System.out.println();
     }
     public void reverseInorder(Node root){
-        System.out.println("*******Reverse inorder traversal*******");
         Node current=rightMostChild(root);
         while(current!=null){
             System.out.print(current.data + " ");
@@ -98,6 +96,21 @@ class BinaryTree extends ThreadedBinaryTree{
                 current=rightMostChild(current.left);
         }
         System.out.println();
+    }
+    //recursive function for preorder traversal
+    public void preorder(Node root){
+        if(root != null){
+            System.out.println(root.data + " ");
+            preorder(root.left);
+            preorder(root.right);
+        }
+    }
+    public void postorder(Node root){
+        if(root != null){
+            postorder(root.left);
+            postorder(root.right);
+            System.out.println(root.data + " ");
+        }
     }
     //function to find left most child
     public Node leftMostChild(Node node){
@@ -122,27 +135,38 @@ class BinarySearchTree{
         System.out.print("Enter the data for root node:");
         int data=sc.nextInt();
         bt.root = new Node(data);
-        int ch = 4;
+        int ch = 6;
         do{
             System.out.println("Binary Tree Menu");
-            System.out.println("1.Insert \n2.Inorder Traversal\n3.Reverse Inorder Traversal\n4.Exit\nEnter your choice:");
+            System.out.println("1.Insert \n2.Inorder Traversal\n3.Reverse Inorder Traversal\n4.Preorder Traversal\n5.Postorder Traversal\n6.Exit\nEnter your choice:");
             ch = sc.nextInt();
             switch(ch){
                 case 1://insert 
-                        System.out.print("Enter the data for node:");
-                        data=sc.nextInt();
-                        bt.insert(data);
-                        break;
+                    System.out.print("Enter the data for node:");
+                    data=sc.nextInt();
+                    bt.insert(data);
+                    break;
                 case 2://inorder traversal
-                        bt.inorder(bt.root);
-                        break;
+                    System.out.println("*******Inorder traversal*******");
+                    bt.inorder(bt.root);
+                    break;
                 case 3://reverse inorder traversal
-                        bt.reverseInorder(bt.root);
-                        break;        
-                case 4: break;//return;        
+                    System.out.println("*******Reverse inorder traversal*******");
+                    bt.reverseInorder(bt.root);
+                    break;
+                case 4://preorder traversal
+                    System.out.println("*******Preorder Traversal*******");
+                    bt.preorder(bt.root);
+                    break;
+                case 5://postorder traversal
+                    System.out.println("*******Postorder Traversal*******");
+                    bt.postorder(bt.root);
+                    break;
+                case 6://Exit
+                    break;
                 default: System.out.println("Invalid operation!");
             }
-        }while(ch<4);
+        }while(ch<6);
         sc.close();
     }
 }
